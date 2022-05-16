@@ -1,0 +1,30 @@
+.btn{
+    margin: 5px;
+}
+.large-drop{
+    display: block !important;
+}
+.small-drop{
+    display: none !important;
+}
+@media only screen and (max-width:992px) {
+    .large-drop{
+        display: none !important;
+    }
+    .small-drop{
+        display: block !important;
+        
+        /* margin-right: 0px; */
+    }
+}
+.menu svg{
+    margin-right: 5px;
+}
+@media only screen and (max-width:400px) {
+    .menu span{
+        display: none;
+    }
+    .menu svg{
+        margin-right: 0;
+    }
+}
