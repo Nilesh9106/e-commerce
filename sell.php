@@ -4,6 +4,12 @@ include "auth.php";
 $id=$_COOKIE['id'];
 
 $sql="SELECT * FROM users WHERE id=$id";
+$result=$link->query($sql);
+$row=$result->fetch_assoc();
+$is_admin=$row['is_admin'];
+if($is_admin==0){
+    header("Location: index.php?mess=you are not allowed to go to that page");
+}
 ?>
 <?php
 $n = false;

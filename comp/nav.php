@@ -1,8 +1,14 @@
 <?php
 include "comp/config.php";
+$is_admin=0;
 if (isset($_COOKIE['id'])) {
     $id = $_COOKIE['id'];
     $name = $_COOKIE['username'];
+    $sql="SELECT * FROM users WHERE id=$id";
+    $result=$link->query($sql);
+    $row=$result->fetch_assoc();
+    $is_admin=$row['is_admin'];
+
 } else {
     $name = "Sign In ";
 }
@@ -46,7 +52,14 @@ if (isset($_COOKIE['id'])) {
                     <li class="nav-item">
                         <a class="nav-link" href="#">Orders</a>
                     </li>
-                    
+                    <?php 
+                        if($is_admin==1){
+                            
+                            echo '<li class="nav-item">
+                            <a class="nav-link" href="report_mess.php">Reports</a>
+                        </li>';
+                        }
+                    ?>
                     <?php if (isset($_COOKIE['id'])) { ?>
                         <li class="nav-item">
                             <a class="nav-link" href="signout.php">sign out</a>
@@ -58,7 +71,8 @@ if (isset($_COOKIE['id'])) {
                         <a class="btn menu  btn-outline-dark  btn-sm" href="signin.php" title="Sign in"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                             </svg><span>Sign in</span></a>
-                    <?php } ?>
+                            <?php } ?>
+                            
                     <a class="btn menu d-none  btn-outline-dark  btn-sm" title="Wish list"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                         </svg><span>Wish list</span></a>

@@ -14,9 +14,14 @@
 <body>
 
     <?php require_once "comp/nav.php" ?>
-
+    <?php if(isset($_GET['mess'])){ ?>
+    <div class="alert alert-warning mx-3 my-1 alert-dismissible fade show" role="alert">
+        <?=$_GET['mess']?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php } ?>
     <!-- main carousel -->
-    <div id="carouselExampleCaptions" class="mt-2 carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleCaptions" class=" carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -66,7 +71,7 @@
                         <a class="nav-link " href="#tablet">Tablets</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="#headphone">Headphone</a>
+                        <a class="nav-link" href="#headphone">Headphone</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="#other">Other</a>
@@ -132,6 +137,8 @@
 
 
     </section>
+
+    <?php include "comp/footer.php" ?>
 </body>
 
 </html>

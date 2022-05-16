@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio'";
     } else {
 
-        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%')";
+        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') OR type='$search' OR brand ='$search'";
     }
 }
 

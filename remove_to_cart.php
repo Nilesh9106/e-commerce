@@ -1,4 +1,6 @@
 <?php
+include "auth.php";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $cid = $_POST['cid'];
     $pid = $_POST['pid'];

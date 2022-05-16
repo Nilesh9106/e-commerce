@@ -1,3 +1,4 @@
+<?php include "auth.php" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -286,7 +287,7 @@
                     <h5>$16.80</h5>
                 </div>
             </div>
-            <div class="pay">
+            <div class="pay"> 
                 <button class="btn btn-primary w-100">Pay</button>
             </div>
             <div class="secure">
