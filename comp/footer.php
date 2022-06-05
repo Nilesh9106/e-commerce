@@ -14,19 +14,19 @@
             <!-- Section: Social media -->
             <section class="mb-4">
                 <!-- Facebook -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+                <!-- <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button"><i class="fab fa-facebook-f"></i></a> -->
 
                 <!-- Twitter -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+                <!-- <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button"><i class="fab fa-twitter"></i></a> -->
 
                 <!-- Google -->
-                <a class="btn btn-primary m-1" style="background-color: #dd4b39;" href="#!" role="button"><i class="fab fa-google"></i></a>
+                <!-- <a class="btn btn-primary m-1" style="background-color: #dd4b39;" href="#!" role="button"><i class="fab fa-google"></i></a> -->
 
                 <!-- Instagram -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #ac2bac;" href="https://www.instagram.com/thisisnilesh_3/" role="button"><i class="fab fa-instagram"></i></a>
 
                 <!-- Linkedin -->
-                <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="https://www.linkedin.com/in/nilesh-darji-8957a922a/" role="button"><i class="fab fa-linkedin-in"></i></a>
                 <!-- Github -->
                 <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="https://github.com/Nilesh9106" role="button"><i class="fab fa-github"></i></a>
             </section>

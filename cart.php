@@ -196,17 +196,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <td>
                                                 <div class="price-wrap"> <var class="price">₹<?= $row['price'] ?></var> </div>
                                                 <div class="d-inline d-md-none">
-                                                    <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="remove_to_cart.php?cid=<?= $row1['cid'] ?>&pid=<?= $row['pid'] ?>" class="btn btn-light" data-abc="true"> Remove</a>
+                                                    <a href="remove_to_cart.php?cid=<?= $row1['cid'] ?>&pid=<?= $row['pid'] ?>" class="btn btn-light" data-abc="true"> Remove</a>
                                                 </div>
                                             </td>
-                                            <td class="text-right d-none d-md-block"> <a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip" data-abc="true"> <i class="fa fa-heart"></i></a> <a href="remove_to_cart.php?cid=<?= $row1['cid'] ?>&pid=<?= $row['pid'] ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
+                                            <td class="text-right d-none d-md-block"> <a href="remove_to_cart.php?cid=<?= $row1['cid'] ?>&pid=<?= $row['pid'] ?>" class="btn btn-light" data-abc="true"> Remove</a> </td>
                                         </tr>
                                 <?php  }
                                 } else {
+                                    $d = "Please Add Something in the Cart";
                                     echo '<img src="assets/bg-cart.png" style="margin:20px auto; display:block; width:600px;"  alt="Empty Cart">';
                                 } ?>
-
-
                                 </tbody>
                             </table>
                     </div>
@@ -222,6 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </form>
                     </div>
                 </div>
+
                 <div class="card">
                     <div class="card-body">
                         <dl class="dlist-align">
@@ -236,12 +236,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <dt>Total:</dt>
                             <dd class="text-right text-dark b ml-3"><strong>&nbsp; ₹ <?php echo $total * (1 - $dis); ?></strong></dd>
                         </dl>
-                        <hr> <a href="#" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a> <a href="index.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
+                        <hr>
+                        <?php if(!isset($d)) {?> 
+                        <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
+                        <?php }else{
+                            ?>
+                            <button onclick="alert('<?=$d?>')" class="btn btn-out btn-primary btn-square btn-main"> Make Purchase </button>
+                          
+                          <?php  
+                        } ?>
+                        <a href="index.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
+
                     </div>
                 </div>
             </aside>
         </div>
     </div>
+    
 </body>
 
 </html>

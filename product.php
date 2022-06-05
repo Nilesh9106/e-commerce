@@ -17,7 +17,6 @@
         $sql = "SELECT * FROM `product` WHERE pid = $id";
         $result = mysqli_query($link, $sql);
         $row = mysqli_fetch_assoc($result);
-        
     }
 
     ?>
@@ -30,11 +29,14 @@
                 <div class="col-sm-6 py-5 px-4">
                     <h5 class="font-baloo font-size-20"><?= $row['name'] ?></h5>
                     <small>by <?= $row['brand'] ?></small>
-                    <?php if($row['max_qty']!=0){ ?>
-                    <p class="text-success">In Stock</p>
-                    <?php }else{
-                        echo '<p class="text-danger">Out of Stock</p>';
-                    } ?>
+                    <?php if ($row['max_qty'] == 0) { ?>
+                        <p class="text-danger">Out of Stock</p>
+                    <?php } else if($row['max_qty']<=5) {
+                        echo '<p class="text-danger">Hurry up only  '.$row["max_qty"].'  left</p>';
+                    } else{
+                        echo '<p class="text-success">in Stock</p>';
+                        
+                    }?>
                     <hr class="m-2">
 
                     <!---    product price       -->
@@ -47,47 +49,49 @@
                     </table>
                     <!---    !product price       -->
 
-                    
+
                     <hr>
 
                     <!-- order-details -->
+                    <?php 
+                    
+                    ?>
                     <div id="order-details" class="font-rale d-flex flex-column text-dark">
-                        <small>Delivery by : Mar 29 - Apr 1</small>
-                        <small>Sold by <a href="#">Amazon</a></small>
-                        <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer - 424201</small>
+                        <!-- <small>Delivery by : Mar 29 - Apr 1</small> -->
+                        <small>Sold by <a href="index.php">Shop++</a></small>
+                        <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer - <?=$pincode?></small>
                     </div>
                     <!-- !order-details -->
 
                     <div class="row">
                         <div class="pt-4">
                             <?php
-                            if(isset($_COOKIE['id'])){
-                            $uid=$_COOKIE['id'];
-                            $sql = "SELECT * FROM cart WHERE pid=$id AND id=$uid";
-                            $result=mysqli_query($link, $sql);
-                            
-                            $row5=mysqli_fetch_assoc($result);
-                            if (mysqli_num_rows($result) != 0) {
-                                echo '
+                            if (isset($_COOKIE['id'])) {
+                                $uid = $_COOKIE['id'];
+                                $sql = "SELECT * FROM cart WHERE pid=$id AND id=$uid";
+                                $result = mysqli_query($link, $sql);
+
+                                $row5 = mysqli_fetch_assoc($result);
+                                if (mysqli_num_rows($result) != 0) {
+                                    echo '
                                 <form action="remove_to_cart.php" method="post">
-                                <input type="hidden" name="pid" value="'.$id.'">
-                                <input type="hidden" name="cid" value="'.$row5['cid'].'">
+                                <input type="hidden" name="pid" value="' . $id . '">
+                                <input type="hidden" name="cid" value="' . $row5['cid'] . '">
                                 
                                 <button type="submit"  class="btn btn-outline-success form-control"><i class="fa-solid fa-cart-arrow-down"></i> Remove to Cart</button></form>';
-                            } else {
-                                echo '
-                                <form action="add_to_cart.php?cid='.$id.'" method="post">
-                                <input type="number" class="form-control m-2" value="1" min="1" max="'.$row['max_qty'].'" name="qty" aria-label="qty" aria-describedby="basic-addon1">
+                                } else {
+                                    echo '
+                                <form action="add_to_cart.php?cid=' . $id . '" method="post">
+                                <input type="number" class="form-control m-2" value="1" min="1" max="' . $row['max_qty'] . '" name="qty" aria-label="qty" aria-describedby="basic-addon1">
                                 
                                 <button type="submit"  class="btn btn-outline-success form-control"><i class="fa-solid fa-cart-arrow-down"></i> Add to Cart</button></form>';
-                                
-                            }
-                        }else{
-                            echo '<form action="add_to_cart.php" method="post">
+                                }
+                            } else {
+                                echo '<form action="add_to_cart.php" method="post">
                             <input type="number" class="form-control m-2" value="1" min="1" name="qty" aria-label="qty" aria-describedby="basic-addon1">
                             
                             <button type="submit"  class="btn btn-outline-success form-control"><i class="fa-solid fa-cart-arrow-down"></i> Add to Cart</button></form>';
-                        }
+                            }
                             ?>
                         </div>
                     </div>

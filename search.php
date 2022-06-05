@@ -1,26 +1,7 @@
 <?php
+include "comp/config.php";
 // $search = 'null';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $search = $_POST['search'];
-    if (isset($_POST['radio']) and ($_POST['min'])!="" and ($_POST['max'])!="") {
-        $radio = $_POST['radio'];
-        $min = $_POST['min'];
-        $max = $_POST['max'];
-        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max' AND price >= '$min'";
-    } else if (isset($_POST['radio']) and ($_POST['max'])!="") {
-        $radio = $_POST['radio'];
-        $max = $_POST['max'];
-        
-        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max'";
-    } else if (isset($_POST['radio'])) {
-        $radio = $_POST['radio'];
-        
-        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio'";
-    } else {
 
-        $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') OR type='$search' OR brand ='$search'";
-    }
-}
 
 
 ?>
@@ -50,11 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <?php include "comp/nav.php";
-    include "comp/config.php"; ?>
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $search = $_POST['search'];
+        if (isset($_POST['radio']) and ($_POST['min']) != "" and ($_POST['max']) != "") {
+            $radio = $_POST['radio'];
+            $min = $_POST['min'];
+            $max = $_POST['max'];
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max' AND price >= '$min'";
+        } else if (isset($_POST['radio']) and ($_POST['max']) != "") {
+            $radio = $_POST['radio'];
+            $max = $_POST['max'];
+    
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max'";
+        } else if (isset($_POST['radio'])) {
+            $radio = $_POST['radio'];
+    
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio'";
+        } else {
+    
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') OR type='$search' OR brand ='$search'";
+        }
+    }
+     ?>
     <section class="row" style="background-color: #eee;">
         <div class="accordion m-2 col-3 filter" id="accordionExample">
             <form action="search.php" method="post">
-                <input type="hidden" name="search" value="<?=$search?>">
+                <input type="hidden" name="search" value="<?= $search ?>">
                 <h1 class="text-center">Filters</h1>
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
@@ -95,15 +97,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class=" col my-2 container-fluid">
 
             <?php
-
             $result = mysqli_query($link, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    
                     include "comp/search_list.php";
+           
                 }
             } ?>
         </div>
     </section>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(search: <?= $search ?>, null, window.location.href);
+        }
+    </script>
 </body>
 
 </html>

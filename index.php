@@ -8,17 +8,25 @@
     <title>Home</title>
     <?php include "comp/link.php" ?>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/loader.css">
 
 </head>
 
 <body>
-
-    <?php require_once "comp/nav.php" ?>
-    <?php if(isset($_GET['mess'])){ ?>
-    <div class="alert alert-warning mx-3 my-1 alert-dismissible fade show" role="alert">
-        <?=$_GET['mess']?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <div class="container1" style="background-color: #eee !important;">
+        <div class="yellow"></div>
+        <div class="red"></div>
+        <div class="blue"></div>
+        <div class="violet"></div>
     </div>
+    <?php require_once "comp/nav.php" ?>
+    <?php if (isset($_GET['mess'])) { ?>
+        <div class="alert alert-success mx-3 my-1 alert-dismissible fade show" role="alert">
+            <?= $_GET['mess'] ?>
+            <form action="index.php" method="POST">
+                <button type="submit" class="btn-close"></button>
+            </form>
+        </div>
     <?php } ?>
     <!-- main carousel -->
     <div id="carouselExampleCaptions" class=" carousel slide" data-bs-ride="carousel">
@@ -139,6 +147,15 @@
     </section>
 
     <?php include "comp/footer.php" ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(window).on('load', function() {
+            $(".container1").fadeOut();
+        });
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </body>
 
 </html>

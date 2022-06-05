@@ -43,7 +43,7 @@
                                 <div class="d-flex flex-column mt-4">
                                     <a class="btn btn-primary btn-sm" href="product.php?id=<?=$row['pid']?>">Details</a>
                                     
-                                    <a class="btn btn-outline-dark btn-sm mt-2" href="add_to_cart.php">
+                                    <a class="btn btn-outline-dark btn-sm mt-2" href="add_to_cart.php?cid=<?=$row['pid']?>">
                                         Add to Cart
                                     </a>
                                 </div>

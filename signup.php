@@ -18,23 +18,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pincode = $_POST['pincode'];
         $pass = $_POST['pass'];
         $activation_code = generate_activation_code();
-        if (register_user($email,$username,$pass,$activation_code,$pincode,$city." ".$state)) {
+        if (register_user($email, $username, $pass, $activation_code, $pincode, $city . " " . $state)) {
             $check = "secondary";
             $n = true;
             $mess = "Your Account opened successfully please check your email for verify your account";
-            $activation_link="http://localhost/project2/activate.php?email=$email&activation_code=$activation_code";
-            $subject="activation of your account";
-            $message="hi $username,Please click the following link to activate your account:     $activation_link";
-            $header="FROM: nileshdarji282003@gmail.com \r \n";
-            if(mail($email,$subject,$message,$header)){
-                $check="success";
+            $activation_link = "http://localhost/project2/activate.php?email=$email&activation_code=$activation_code";
+            $subject = "activation of your account";
+            $message = "hi $username,Please click the following link to activate your account:     $activation_link";
+            $header = "FROM: nileshdarji282003@gmail.com \r \n";
+            if (mail($email, $subject, $message, $header)) {
+                $check = "success";
             }
-            
         } else {
-        
+
             $n = true;
             $mess = "something went wrong please try again :(";
-            
         }
     } else {
         $check = "primary";
@@ -66,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
+    
     <div class="container-fluid d-flex flex-column justify-content-center w-75 mar border rounded">
 
         <h1 class="text-center mt-2">Sign Up</h1>
@@ -75,35 +74,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?= $mess ?>
             </div>
         <?php } ?>
-        <form class="col g-3 d-flex flex-column align-items-center  needs-validation" action="signup.php" method="POST" novalidate>
+        <form class="col g-3 d-flex flex-column align-items-center  needs-validation" action="signup.php" method="POST" id="form" novalidate>
             <div class="col-md-6">
                 <label for="validationCustom01" class="form-label">Username</label>
-                <input type="text" name="uname" class="form-control" id="validationCustom01" required>
+                <input type="text" name="uname" autocomplete="off" placeholder="Username" class="form-control" id="validationCustom01" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
-           
+
             <div class="col-md-6">
                 <label for="validationCustomUsername" class="form-label">Email</label>
-                <div class="input-group has-validation">
-                    <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    <input type="email" name="email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-                    <div class="invalid-feedback">
-                        Please choose chose Email.
-                    </div>
+                <input type="email" name="email" placeholder="Enter your email" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Please choose chose Email.
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="validationCustom03" class="form-label">City</label>
-                <input type="text" name="city" class="form-control" id="validationCustom03" required>
+                <input type="text" name="city" placeholder="City" class="form-control" id="validationCustom03" required>
                 <div class="invalid-feedback">
                     Please provide a valid city.
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="validationCustom04" class="form-label">State</label>
-                <input type="text" name="state" class="form-control" id="validationCustom05" required>
+                <input type="text" name="state" placeholder="state" class="form-control" id="validationCustom05" required>
 
                 <div class="invalid-feedback">
                     Please select a valid state.
@@ -111,29 +107,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="col-md-6 mb-2">
                 <label for="validationCustom05" class="form-label">Pincode</label>
-                <input type="text" name="pincode" class="form-control" id="validationCustom05" minlength="6" required>
+                <input type="text" name="pincode" placeholder="pincode" class="form-control" id="validationCustom05" minlength="6" required>
                 <div class="invalid-feedback">
                     Please provide a valid Pincode.
                 </div>
             </div>
-            
+
             <div class="col-md-6 mb-2">
                 <label for="validationCustom05" class="form-label">choose Password</label>
-                <input type="password" name="pass" class="form-control" id="validationCustom05" minlength="8" required>
+                <input type="password" name="pass" placeholder="password" class="form-control" id="validationCustom05" minlength="8" required>
                 <div class="invalid-feedback">
                     Please provide a Password at least 8 character .
                 </div>
             </div>
 
             <div class="col-md-6">
-                <a href="signin.php" class="ms-1 text-decoration-none">Already Have an account</a>
+                <a href="signin.php" class="text-decoration-underline ms-1 text-decoration-none">Already Have an account</a>
             </div>
             <div class="col-md-6 my-3">
                 <button class="btn btn-primary w-100" type="submit">Submit form</button>
             </div>
         </form>
     </div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
+        
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {
             'use strict'

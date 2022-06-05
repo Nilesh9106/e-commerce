@@ -1,7 +1,6 @@
 <?php
 
 const SENDER_EMAIL_ADDRESS = 'nileshdarji282003@gmail.com';
-include "auth.php";
 
 // registration 
 function register_user(string $email, string $username, string $password, string $activation_code, int $pincode, string $address, int $expiry = 1 * 24  * 60 * 60, bool $is_admin = false): bool
