@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $oid = $link->insert_id;
         array_push($orders, $oid);
     }
-    $mess = "orders Added Successfully :)";
+    $mess = "Orders Added Successfully :)";
 }
 ?>
 
