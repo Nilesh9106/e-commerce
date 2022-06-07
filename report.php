@@ -2,6 +2,7 @@
 include "auth.php";
 include "comp/config.php";
 $message=$_POST['mess'];
+$message=str_replace("'", ' ', $message);
 $id=$_COOKIE['id'];
 $sql="SELECT * FROM users WHERE id =$id";
 $result=$link->query($sql);
@@ -14,4 +15,3 @@ if($link->query($sql)){
     
     header("Location: index.php?report=something went wrong");
 }
-?>

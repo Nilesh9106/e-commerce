@@ -2,7 +2,7 @@
 include "comp/config.php";
 $check = true;
 $id = $_COOKIE['id'];
-
+$dis=$_GET['dis'] ?? 0.1;
 
 $r=$link->query("SELECT * FROM users WHERE id=$id");
 $u=$r->fetch_assoc();
@@ -85,7 +85,7 @@ $username=$u['username'];
                             <?php } ?>
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Total (₹)</span>
-                                <strong>₹ <?= $total ?></strong>
+                                <strong>₹ <?= $total ?> - <?=$dis*100?>% = <?=($total - $total*$dis)?></strong>
                             </li>
                         </ul>
                     </div>
@@ -96,7 +96,7 @@ $username=$u['username'];
                     $row = $result->fetch_assoc();
                     $email = $row['email'];
                     $a = $row['address'];
-                    $p = explode(' ', $a);
+                    $p = explode('|', $a);
                     $city = $p[0];
                     $state = $p[1];
                     $address = $city . ' , ' . $state;
@@ -104,7 +104,7 @@ $username=$u['username'];
                     ?>
                     <div class="col-md-7 col-lg-8">
                         <h4 class="mb-3">Billing address</h4>
-                        <form class="needs-validation" action="orders.php" method="POST" onsubmit="confirm('Do you really want to purchase products?')" novalidate>
+                        <form class="needs-validation" action="orders.php?dis=<?=$dis?>" method="POST" onsubmit="confirm('Do you really want to purchase products?')" novalidate>
                             <div class="row g-3">
 
 

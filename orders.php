@@ -1,9 +1,11 @@
 <?php
 include "comp/config.php";
+include "auth.php";
 $id = $_COOKIE['id'];
 $sql = "SELECT * FROM cart WHERE id=$id";
 $result = $link->query($sql);
 $orders = array();
+$dis = $_GET['dis'] ?? 0.1;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $otype = $_POST['radio'];
     $address = $_POST['address'];
@@ -14,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pid = $row['pid'];
         $qty = $row['qty'];
         $cid = $row['cid'];
-        $sql = "INSERT INTO orders(pid,qty,ordertype,address,id,status) VALUES ($pid,$qty,'$otype','$address',$id,'Dispatched')";
+        $sql = "INSERT INTO orders(pid,qty,ordertype,address,id,status,discount) VALUES ($pid,$qty,'$otype','$address',$id,'Dispatched',$dis)";
         $r = $link->query($sql);
         if ($r) {
             $link->query("DELETE FROM `cart` WHERE cid=$cid");
@@ -42,9 +44,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         }
 
+        .empty {
+            width: 450px;
+            margin: 20px auto;
+
+        }
+
         @media only screen and (max-width:784px) {
             tbody {
                 font-size: 11px;
+            }
+
+            .empty {
+                width: 300px;
             }
         }
     </style>
@@ -61,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $sql = "SELECT * FROM orders";
             $result = $link->query($sql);
             if ($result->num_rows == 0) {
-                echo '<img src="assets/empty-cart.png"  style="width: 450px; margin: 20px auto;" alt="emty cart">';
+                echo '<img src="assets/empty-cart.png"  class="empty" alt="emty cart">';
             } else {
             ?>
 
@@ -98,7 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 ?>
                                 <td><?= $username ?></td>
                             </tr>
-                    <?php } } ?>
+                    <?php }
+                    } ?>
                     </tbody>
                 </table>
         </div>
@@ -113,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php } ?>
         <div class="p-md-5 mx-md-5 p-3 d-flex flex-column justify-content-center">
             <?php
-            $sql = "SELECT * FROM orders";
+            $sql = "SELECT * FROM orders WHERE id=$id";
             $result = $link->query($sql);
             if ($result->num_rows == 0) {
                 echo '<img src="assets/empty-cart.png"  style="width: 450px; margin: 20px auto;" alt="emty cart">';

@@ -21,7 +21,6 @@ include "comp/config.php";
             .filter {
                 width: 100%;
             }
-
             .single {
                 width: 100%;
             }
@@ -33,16 +32,18 @@ include "comp/config.php";
     <?php include "comp/nav.php";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $search = $_POST['search'];
+        $search=str_replace("'", ' ', $search);
         if (isset($_POST['radio']) and ($_POST['min']) != "" and ($_POST['max']) != "") {
-            $radio = $_POST['radio'];
-            $min = $_POST['min'];
-            $max = $_POST['max'];
-            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max' AND price >= '$min'";
+            $radio =$_POST['radio'];
+            $min =(int)$_POST['min'];
+            $max =(int)$_POST['max'];
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <=$max AND price >= $min";
+            
         } else if (isset($_POST['radio']) and ($_POST['max']) != "") {
             $radio = $_POST['radio'];
-            $max = $_POST['max'];
-    
-            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <='$max'";
+            $max =(int)$_POST['max'];
+            
+            $sql = "SELECT * FROM product WHERE name LIKE CONCAT('%','$search','%') AND type = '$radio' AND price <=$max";
         } else if (isset($_POST['radio'])) {
             $radio = $_POST['radio'];
     
@@ -100,7 +101,6 @@ include "comp/config.php";
             $result = mysqli_query($link, $sql);
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    
                     include "comp/search_list.php";
            
                 }

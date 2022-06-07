@@ -59,7 +59,7 @@
                     <div id="order-details" class="font-rale d-flex flex-column text-dark">
                         <!-- <small>Delivery by : Mar 29 - Apr 1</small> -->
                         <small>Sold by <a href="index.php">Shop++</a></small>
-                        <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer - <?=$pincode?></small>
+                        <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to <?=$pincode ?? 'you'?></small>
                     </div>
                     <!-- !order-details -->
 

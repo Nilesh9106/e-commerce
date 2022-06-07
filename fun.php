@@ -12,15 +12,22 @@ function register_user(string $email, string $username, string $password, string
             VALUES(?,?, ?,?,?,?,?,?)';
 
     $stmt = mysqli_prepare($link, $sql);
-    mysqli_stmt_bind_param($stmt, "sssisssi", $username, $email,$password , $is_admin,$activation_code,$time , $address, $pincode);
-    $password=password_hash($password, PASSWORD_BCRYPT);
-    $activation_code= password_hash($activation_code, PASSWORD_DEFAULT);
-    $time=date('Y-m-d H:i:s',  time() + $expiry);
+    mysqli_stmt_bind_param($stmt, "sssisssi", $username, $email, $password, $is_admin, $activation_code, $time, $address, $pincode);
+    $password = password_hash($password, PASSWORD_BCRYPT);
+    $activation_code = password_hash($activation_code, PASSWORD_DEFAULT);
+    $time = date('Y-m-d H:i:s',  time() + $expiry);
 
     return $stmt->execute();
 }
 //find user by user name
-function find_user_by_username(string $username)
+
+// user active
+function is_user_active($user)
+{
+    return (int)$user['active'] === 1;
+}
+//login
+function login(string $username, string $password): bool
 {
     if (!isset($link)) {
         include "comp/config.php";
@@ -32,28 +39,18 @@ function find_user_by_username(string $username)
     $stmt = mysqli_prepare($link, $sql);
     mysqli_stmt_bind_param($stmt, "ss", $username, $username);
     mysqli_stmt_execute($stmt);
-
     $result = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
+    if (mysqli_num_rows($result)>0) {
 
-    return $row;
-}
-// user active
-function is_user_active($user)
-{
-    return (int)$user['active'] === 1;
-}
-//login
-function login(string $username, string $password): bool
-{
-    $user = find_user_by_username($username);
-    var_dump(password_verify($password,$user['password']));
-    if ($user && is_user_active($user) && password_verify($password, $user['password'])) {
-        setcookie('id', $user['id'], time() + 60 * 60 * 24 * 365 * 3);
-        setcookie('username',$user['username'],time()+60*60*24*365*3);
-        return true;
+        $user = mysqli_fetch_assoc($result);
+        if (password_verify($password, $user['password'])) {
+            if ($user && is_user_active($user)) {
+                setcookie('id', $user['id'], time() + 60 * 60 * 24 * 365 * 3);
+                setcookie('username', $user['username'], time() + 60 * 60 * 24 * 365 * 3);
+                return true;
+            }
+        }
     }
-
     return false;
 }
 //generate activation code
@@ -92,7 +89,7 @@ function find_unverified_user(string $activation_code, string $email)
     $statement = mysqli_prepare($link, $sql);
     mysqli_stmt_bind_param($statement, "s", $email);
     $statement->execute();
-    $result=mysqli_stmt_get_result($statement);
+    $result = mysqli_stmt_get_result($statement);
     $user = mysqli_fetch_assoc($result);
 
     if ($user) {

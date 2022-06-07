@@ -18,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pincode = $_POST['pincode'];
         $pass = $_POST['pass'];
         $activation_code = generate_activation_code();
-        if (register_user($email, $username, $pass, $activation_code, $pincode, $city . " " . $state)) {
+        if (register_user($email, $username, $pass, $activation_code, $pincode, $city . "|" . $state)) {
             $check = "secondary";
             $n = true;
             $mess = "Your Account opened successfully please check your email for verify your account";
             $activation_link = "http://localhost/project2/activate.php?email=$email&activation_code=$activation_code";
             $subject = "activation of your account";
             $message = "hi $username,Please click the following link to activate your account:     $activation_link";
-            $header = "FROM: nileshdarji282003@gmail.com \r \n";
+            $header = "FROM: shoppp@gmail.com \r \n";
             if (mail($email, $subject, $message, $header)) {
                 $check = "success";
             }

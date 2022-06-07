@@ -1,5 +1,6 @@
 <?php
 include "comp/config.php";
+
 if (isset($_GET['r'])) {
     $oid = $_GET['r'];
 } else {
@@ -9,6 +10,7 @@ $r = $link->query("SELECT * FROM orders WHERE oid = $oid");
 $order = $r->fetch_array();
 $pid = $order['pid'];
 $id = $order['id'];
+$dis = $order['discount'];
 $r = $link->query("SELECT * FROM product WHERE pid =$pid");
 $product = $r->fetch_assoc();
 $r = $link->query("SELECT * FROM users WHERE id=$id");
@@ -98,9 +100,9 @@ $user = $r->fetch_array();
                         </div>
                         <div class="col-md-3 col-6 mb-4 mb-md-0">
                             <h5 class="mb-2">
-                                <span class="align-middle">₹ <?= $product['price'] ?> ✕ <?= $order['qty'] ?></span>
+                                <span class="align-middle">₹ <?= ($product['price']) ?> ✕ <?= $order['qty'] ?></span>
                             </h5>
-                            <p class="text-danger"><small>You save 10%</small></p>
+                            <p class="text-danger"><small>You save <?=$dis*100?>%</small></p>
                         </div>
                     </div>
                     <hr>
@@ -112,8 +114,11 @@ $user = $r->fetch_array();
                             <ul class="list-unstyled">
                                 <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>₹ <?= ($product['price'] * $order['qty']) ?></li>
                                 <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Shipping</span>₹ 999</li>
+                                <li class="text-muted ms-3 mt-2"><span class="text-success me-4">Discount</span >-<?=$dis*100?> %</li>
                             </ul>
-                            <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span style="font-size: 25px;">₹ <?php echo ($product['price'] * $order['qty'] + 999); ?></span></p>
+                            <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span>
+                            <span style="font-size: 18px; " class="text-decoration-line-through">₹ <?php echo ($product['price'] * $order['qty'] + 999 ); ?></span>
+                            <span style="font-size: 22px; color:green;">₹ <?php echo ($product['price'] * $order['qty'] + 999 - ($product['price']*$order['qty']*$dis)); ?></span></p>
                         </div>
                     </div>
                 </div>

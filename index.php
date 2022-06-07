@@ -61,7 +61,7 @@
     </div>
     <!-- !main carousel -->
     <!-- second navbar  -->
-    <nav class="navbar navbar-expand-lg navbar-dark mx-4 my-3 bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark my-3 bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Catagories:</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">

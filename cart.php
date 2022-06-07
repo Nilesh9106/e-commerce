@@ -139,6 +139,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .btn-apply {
             font-size: 11px;
         }
+
+        .empty {
+            margin: 20px auto;
+            display: block;
+            width: 600px;
+        }
+        @media only screen and (max-width:784px) {
+            .empty{
+                width: 320px;
+            }
+        }
     </style>
 </head>
 
@@ -204,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php  }
                                 } else {
                                     $d = "Please Add Something in the Cart";
-                                    echo '<img src="assets/bg-cart.png" style="margin:20px auto; display:block; width:600px;"  alt="Empty Cart">';
+                                    echo '<img src="assets/bg-cart.png" class="empty"  alt="Empty Cart">';
                                 } ?>
                                 </tbody>
                             </table>
@@ -237,13 +248,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <dd class="text-right text-dark b ml-3"><strong>&nbsp; ₹ <?php echo $total * (1 - $dis); ?></strong></dd>
                         </dl>
                         <hr>
-                        <?php if(!isset($d)) {?> 
-                        <a href="checkout.php" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
-                        <?php }else{
-                            ?>
-                            <button onclick="alert('<?=$d?>')" class="btn btn-out btn-primary btn-square btn-main"> Make Purchase </button>
-                          
-                          <?php  
+                        <?php if (!isset($d)) { ?>
+                            <a href="checkout.php?dis=<?=$dis?>" class="btn btn-out btn-primary btn-square btn-main" data-abc="true"> Make Purchase </a>
+                        <?php } else {
+                        ?>
+                            <button onclick="alert('<?= $d ?>')" class="btn btn-out btn-primary btn-square btn-main"> Make Purchase </button>
+
+                        <?php
                         } ?>
                         <a href="index.php" class="btn btn-out btn-success btn-square btn-main mt-2" data-abc="true">Continue Shopping</a>
 
@@ -252,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </aside>
         </div>
     </div>
-    
+
 </body>
 
 </html>
