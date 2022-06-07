@@ -15,21 +15,21 @@ if (isset($_COOKIE['id'])) {
 }
 
 ?>
-<nav id="navbar" class="navbar navbar-light bg-light sticky-top">
+<nav id="navbar" class="navbar navbar-dark bg-dark  sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php"><img src="assets/Shop++1.jpg"  height="65px"  alt=""></a>
+        <a class="navbar-brand" href="index.php"><img src="assets/logo1.jpg"  height="100px" alt=""></a>
         <!-- <div class="d-flex"> -->
         <div class="my-2 d-flex flex-wrap">
             <div class="d-flex large-drop">
                 <?php if (!isset($_COOKIE['id'])) { ?>
-                    <a class="btn menu  btn-outline-dark  btn-sm" href="signin.php" title="Sign in"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <a class="btn menu  btn-outline-light  btn-sm" href="signin.php" title="Sign in"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
                             <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg><span>Sign in</span></a>
                 <?php } ?>
-                <a class="btn menu  btn-outline-dark  btn-sm" href="team.php" title="Team"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <a class="btn menu  btn-outline-light  btn-sm" href="team.php" title="Team"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                     </svg><span>Our Team</span></a>
-                <a class="btn btn-outline-dark  btn-sm" href="cart.php" title="My Cart"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="margin-right: 5px;" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                <a class="btn btn-outline-light  btn-sm" href="cart.php" title="My Cart"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" style="margin-right: 5px;" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
                         <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
                     </svg>My Cart</a>
             </div>
