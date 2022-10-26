@@ -8,6 +8,6 @@
 ## Installation
 
     download the code.
-    there is one SQL folder is this there is .sql file goto your phpmyadmin and import this file.
+    there is one SQL folder in this you will find .sql file. goto your phpmyadmin and import this file.
     Setup PHP.ini for email signup.
     Now,open project folder in browser.
